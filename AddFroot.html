@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <style>
+    #header {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 2px solid gray;
+    }
+
+    #header input {
+      width: 30%;
+      border: 2px solid gray;
+      border-radius: 5px;
+    }
+
+    h2 {
+      margin: 0;
+    }
+
+    form {
+      margin: 30px;
+      width: 100%;
+    }
+
+    form input {
+      height: 35px;
+      width: 40%;
+      border: 2px solid yellowgreen;
+      border-radius: 5px;
+      margin-top: 5px;
+    }
+
+    form button {
+      height: 40px;
+      width: 10%;
+      border: none;
+      border-radius: 5px;
+      margin-top: 5px;
+      background-color: yellowgreen;
+    }
+
+    ul {
+      list-style-type: none;
+      background-color: pink;
+      padding: 5px;
+      margin: 0 30px;
+      width: 50%;
+      border-radius: 5px;
+    }
+
+    li {
+      font-size: 20px;
+      padding: 10px;
+      margin: 10px;
+      border-radius: 5px;
+      background-color: lightyellow;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .delete-btn {
+      align-self: flex-end;
+      background-color: tomato;
+      border: none;
+      border-radius: 2px;
+      padding: 5px 18px;
+    }
+
+    .edit-btn {
+      align-self: flex-end;
+      background-color: lightblue;
+      border: none;
+      border-radius: 2px;
+      padding: 5px 10px;
+      margin-top: 5px;
+    }
+  </style>
+  <body style="margin: 0">
+    <div id="header" style="padding: 1rem; background-color: lightblue">
+      <h1 id="main-heading" style="margin: 0">Fruit Shop</h1>
+      <input id="filter" type="text" placeholder="Search fruits..." />
+    </div>
+    <div>
+      <form>
+        <h2 id="basket-heading">Add Fruits</h2>
+        <input type="text" name="fruit" id="fruit-to-add" />
+        <button type="submit">Add</button>
+      </form>
+      <ul class="fruits">
+        <li class="fruit">
+          Banana
+          <p>ba</p>
+          <button class="delete-btn">x</button
+          ><button class="edit-btn">Edit</button>
+        </li>
+        <li class="fruit">
+          Apple
+          <p>awsome</p>
+          <button class="delete-btn">x</button
+          ><button class="edit-btn">Edit</button>
+        </li>
+        <li class="fruit">
+          Orange
+          <p></p>
+          <button class="delete-btn">x</button
+          ><button class="edit-btn">Edit</button>
+        </li>
+        <li class="fruit">
+          Kiwi
+          <p></p>
+          <button class="delete-btn">x</button
+          ><button class="edit-btn">Edit</button>
+        </li>
+      </ul>
+    </div>
+    <div id="thanks"></div>
+  </body>
+  <script>
+    const form = document.querySelector("form");
+    const addFruitBtn = document.querySelector("button[type='submit']");
+
+    // Create input for fruit description
+    const descriptionInput = document.createElement("input");
+    descriptionInput.setAttribute("type", "text");
+    descriptionInput.setAttribute("id", "description");
+    descriptionInput.setAttribute("placeholder", "Fruit description...");
+    const filterFild = document.querySelector("#filter");
+
+    // Insert the description input before the add button
+    form.insertBefore(descriptionInput, addFruitBtn);
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const fruitNameInput = document.querySelector("#fruit-to-add");
+      const fruitDescriptionInput = document.querySelector("#description");
+
+      const fruitName = fruitNameInput.value.trim();
+      const fruitDescription = fruitDescriptionInput.value.trim();
+
+      // if (fruitName === "" || fruitDescription === "") {
+      //   alert("Please enter both fruit name and description.");
+      //   return;
+      // }
+
+      const fruitItem = document.createElement("li");
+      fruitItem.classList.add("fruit");
+
+      const fruitNameSpan = document.createElement("span");
+      fruitNameSpan.textContent = fruitName;
+
+      const deleteBtn = document.createElement("button");
+      deleteBtn.classList.add("delete-btn");
+      deleteBtn.textContent = "x";
+
+      const editBtn = document.createElement("button");
+      editBtn.classList.add("edit-btn");
+      editBtn.textContent = "Edit";
+
+      const descriptionParagraph = document.createElement("p");
+      descriptionParagraph.style.fontStyle = "italic"; // Ensure the description is in italics
+      descriptionParagraph.textContent = fruitDescription;
+
+      fruitItem.appendChild(fruitNameSpan);
+      fruitItem.appendChild(deleteBtn);
+      fruitItem.appendChild(editBtn);
+      fruitItem.appendChild(descriptionParagraph);
+
+      document.querySelector(".fruits").appendChild(fruitItem);
+    });
+    //------------- filter  logic  ----------------
+    // const fruitItem = document.createElement("li");
+    // const deleteBtn=document.getElementsByClassName("delete-btn")
+    // const descriptionParagraph = document.createElement("p");
+    // descriptionParagraph.style.fontStyle = "italic"; // Ensure the description is in italics
+    // descriptionParagraph.textContent = "cool";
+
+
+    // for (let i = 0; i < fruitItems.length; i++) {
+    //   fruitItems[i].insertBefore(descriptionParagraph,deleteBtn);
+    // }
+
+    const fruitItems = document.querySelectorAll(".fruit");
+    // console.log(fruitItems[1].firstElementChild.textContent.toLocaleLowerCase());
+
+    filterFild.addEventListener("keyup", function (event) {
+      const filterText = event.target.value.toLowerCase();
+      // console.log(filterText)
+      for (let i = 0; i < fruitItems.length; i++) {
+        const fruitItemText =
+          fruitItems[i].firstChild.textContent.toLocaleLowerCase();
+        const fruitDescription =
+          fruitItems[i].firstElementChild.textContent.toLocaleLowerCase();
+        // console.log(fruitDescription)
+        console.log(fruitItemText);
+        if (
+          fruitItemText.indexOf(filterText) == -1 ||
+          fruitItemText.indexOf(filterText) == -1
+        ) {
+          fruitItems[i].style.display = "none";
+        } else {
+          fruitItems[i].style.display = "flex";
+        }
+      }
+    });
+    
+  </script>
+</html>

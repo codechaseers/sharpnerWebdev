@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body style="margin: 0">
+    <form onsubmit="handleFormSubmit(event)">
+      <label for="username">Username</label>
+      <input type="text" name="username" id="username" />
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" />
+      <label for="phone">Phone No</label>
+      <input type="tel" name="phone" id="phone" />
+      <button type="submit">Submit</button>
+    </form>
+    <ul id="user-list"></ul>
+    <!-- Add Unordered List Element Here -->
+  </body>
+
+  <script>
+    // Write your code below:
+    // Write your code below:
+    // Write your code below:
+    // Write your code below:
+    const userForm = document.querySelector("#userForm");
+    let users = [];
+    function handleFormSubmit(event) {
+      event.preventDefault();
+
+      const username = event.target.username.value;
+      const email = event.target.email.value;
+      const phone = event.target.phone.value;
+
+      console.log(username);
+      console.log(email);
+      console.log(phone);
+
+      const userDetails = {
+        username: username,
+        email: email,
+        phone: phone,
+      };
+      users.push(userDetails);
+
+      // Store user details in local storage
+      localStorage.setItem(email, JSON.stringify(userDetails));
+
+      displayUserList();
+    }
+
+    function displayUserList() {
+      const userList = document.querySelector("#user-list");
+
+      // Clear previous list items
+      // userList.innerHTML = "";
+
+      // Get users from local storage
+      //   const users = JSON.parse(localStorage.getItem("User Details")) || [];
+
+      if (users.length === 0) {
+        const noUsersLi = document.createElement("li");
+        noUsersLi.textContent = "No user details found in local storage.";
+        userList.appendChild(noUsersLi);
+      } else {
+        users.forEach((user) => {
+          console.log(user);
+          const userLi = document.createElement("li");
+          userLi.innerHTML = `   ${user.username},  ${user.email},  ${user.phone} <button class="delete-btn" >delete</button>`;
+          userList.appendChild(userLi);
+        });
+        const deleteButtons = document.querySelectorAll(".delete-btn");
+        deleteButtons.forEach((button) => {
+          button.addEventListener("click", (e) => {
+            console.log("hello delete");
+            const listItem = e.target.parentElement;
+            listItem.remove();
+          });
+        });
+      }
+    }
+
+    module.exports = handleFormSubmit;
+
+    // Attach event listeners to delete buttons
+    const deleteButtons = document.querySelectorAll(".delete-btn");
+
+    deleteButtons.forEach((button) => {
+      button.addEventListener("click", deleteUser);
+    });
+  </script>
+</html>

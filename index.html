@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload</title>
+</head>
+<body>
+    <h1>Upload a File</h1>
+    <!-- <form action="http://localhost:3000/chat/media-message" method="POST" enctype="multipart/form-data"> -->
+    <form action="http://localhost:3000/admin//add-subcategory" method="POST" enctype="multipart/form-data">
+        <!-- <input type="text" name="ticketId" placeholder="ticketId" required>
+        <input type="text" name="userId" placeholder="userId">
+        <input type="text" name="adminId" placeholder="adminId"> -->
+        <input type="text" name="categoryId" placeholder="categoryId">
+        <input type="text" name="name" placeholder="name">
+        <input type="text" name="status" placeholder="status">
+        <input type="checkbox" name="popular" placeholder="popular">
+        <input type="text" name="order" placeholder="order">
+        <input type="text" name="popularityorder" placeholder="popularityorder">
+        <!-- <input type="file" name="myFile" required> -->
+        <input type="file" name="subcategoryIcon"  >
+        <button type="submit">Upload</button>
+    </form>
+</body>
+</html>
