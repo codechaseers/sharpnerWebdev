@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expense Tracker</title>
+  </head>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    crossorigin="anonymous"
+  />
+  <style>
+    body {
+      background: #111227;
+      color: aliceblue;
+    }
+  </style>
+  <body>
+    <!-- Main div -->
+    <div class="container w-70">
+      <h1 class="heading text-center m-4">Expense Tracker</h1>
+      <form onsubmit="handleSubmit(event) ">
+        <div class="mb-3">
+          <label for="expenceAmount" class="form-label">Expense Amount</label>
+          <input
+            type="number"   
+            required         
+            class="form-control w-50"
+            id="expenceAmount"
+            aria-describedby="emailHelp"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label"
+            >Expanse Details</label
+          >
+          <input
+            type="text"
+            required
+            class="form-control w-50"
+            id="exampleInputPassword1"
+          />
+        </div>
+        <div class="form-group mb-4">
+          <label for="exampleFormControlSelect1">Example select</label>
+          <select class="form-control w-50" id="expanseType"  required>
+            <option  >Select</option>
+            <option  value="Travel" id>Travel</option>
+            <option value ="Food">Food</option>
+            <option value="Move">Move</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+      <!-- expance crad detailas -->
+      <div class="card-container d-flex gap-4 mt-3 pt-3 flex-wrap" id="allExpenseContainer">
+      
+      </div>
+    </div>
+  </body>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"
+  ></script>
+  <script src="Expense.js"></script>
+</html>
